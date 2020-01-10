@@ -1,0 +1,25 @@
+table th, table td {
+    vertical-align: top;
+    width: 150px;
+    height: 100px;
+    padding: 1em 10px 1em 1em;
+    border-right: 1px solid #bbb;
+    border-left: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;
+}
+
+.sun {
+    background-color: coral
+}
+
+.sut {
+    background-color: lightskyblue;
+}
+
+.holiday {
+    background-color: #f0e68c;
+}
+
+.inline-block_test form {
+    display: inline-block;
+}
