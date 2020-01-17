@@ -39,30 +39,46 @@ $schedules = $db ->getScheduleAll($date);
     </div>
     </li>
 <?php endforeach;?>
-<?php
-//  foreach($schedules as $schedule) {
-//     print '<li>';
-//     var_dump($schedule['id']);
-//     print '<a href=schedule_detail.php?id='.$schedule['id'].'>'.$schedule['schedule'].'</a>';
-//     print '<div class="inline-block_test">';
-//     print '<form action=delete_schedule.php?id='.$schedule['id'].' method="get">';
-//     print '<input type="submit" value="削除">';
-//     print '</form>';
 
-//     print '<form action=edit_schedule.php?id='.$schedule['id'].'>';
-//     print '<input type="submit" value="編集">';
-//     print '</form>';
-//     print '</div>';
-//     print '</li>';
-//  }
-//  print '</li>';
-?>
 </ul>
 <?= $date ?>に新規登録する予定
 <form action="add_schedule.php" method="post">
     <textarea name="schedule" rows="4" cols="40"></textarea>
     <input type="hidden" value="<?=$date?>" name="date">
+    <br>
+    <input type="button" value="座標取得" onclick="check()">
+    緯度：<input type="text" id="lat" name="lat" value="">
+    経度：<input type="text" id="lng" name="lng" value="">
     <input type="submit" value="登録">
+
+    <div id="map" style="height:500px; width: 50%; margin: 2rem auto 0;"></div>
+            <!-- jqueryの読み込み -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <!-- js -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=Mykey&callback=initMap"></script>
+        <script type="text/javascript">
+            var map = new google.maps.Map(
+            document.getElementById("map"),{
+            zoom : 7,
+            center : new google.maps.LatLng(34.70251217521857, 135.49603700637817),
+            mapTypeId : google.maps.MapTypeId.ROADMAP
+            }
+            );
+            var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(34.70251217521857, 135.49603700637817),
+            map: map,
+            draggable : true
+            });
+            // Check
+            function check(){
+            var pos = marker.getPosition();
+            var lat = pos.lat();
+            var lng = pos.lng();
+            $("#lat").val(lat);
+            $("#lng").val(lng);
+            // alert("緯度："+lat+"、経度："+lng);
+            }
+        </script>
 </form>
 
 </body>
